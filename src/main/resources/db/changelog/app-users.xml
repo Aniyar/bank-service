@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create_app_users_table" author="a.durmagambetova">
+        <createTable tableName="app_users"
+                     remarks="Store info about app_users">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="timestamp with timezone" defaultValueDate="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp with timezone"/>
+            <column name="deleted_at" type="timestamp with timezone"/>
+            <column name="is_deleted" type="smallint" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <!--=====================================================================================================-->
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
