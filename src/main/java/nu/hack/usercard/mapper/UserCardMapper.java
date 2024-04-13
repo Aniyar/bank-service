@@ -1,6 +1,5 @@
 package nu.hack.usercard.mapper;
 
-import nu.hack.bank.mapper.BankMapper;
 import nu.hack.bankcard.mapper.BankCardMapper;
 import nu.hack.usercard.dto.UserCardCreateRequest;
 import nu.hack.usercard.dto.UserCardResponse;

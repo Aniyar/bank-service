@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.bankcard.dto.BankCardCreateRequest;
 import nu.hack.bankcard.dto.BankCardResponse;
-import nu.hack.bankcard.entity.BankCardEntity;
 import nu.hack.bankcard.service.BankCardService;
 import nu.hack.common.dto.PageResponse;
 import org.springdoc.core.annotations.ParameterObject;

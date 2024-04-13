@@ -1,17 +1,10 @@
 package nu.hack.offer.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nu.hack.bankcard.entity.BankCardEntity;
-import nu.hack.category.entity.CategoryEntity;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static nu.hack.common.specification.CommonSpecification.alwaysTrue;
 import static nu.hack.common.specification.CommonSpecification.attributeEquals;
-import static nu.hack.usercard.entity.UserCardEntity_.CARD_NUMBER;
 import static nu.hack.usercard.entity.UserCardEntity_.USER;
 import static nu.hack.common.entity.AuditEntity_.ID;
 

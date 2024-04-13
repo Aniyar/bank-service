@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.category.dto.CategoryCreateRequest;
 import nu.hack.category.dto.CategoryResponse;
-import nu.hack.category.entity.CategoryEntity;
 import nu.hack.category.service.CategoryService;
 import nu.hack.common.dto.PageResponse;
 import org.springdoc.core.annotations.ParameterObject;

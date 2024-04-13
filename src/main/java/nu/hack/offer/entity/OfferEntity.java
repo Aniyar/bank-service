@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nu.hack.bank.entity.BankEntity;
 import nu.hack.bankcard.entity.BankCardEntity;
 import nu.hack.category.entity.CategoryEntity;
 
