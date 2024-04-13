@@ -3,6 +3,7 @@ package nu.hack.category.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.category.dto.CategoryCreateRequest;
+import nu.hack.category.dto.CategoryResponse;
 import nu.hack.category.entity.CategoryEntity;
 import nu.hack.category.service.CategoryService;
 import nu.hack.common.dto.PageResponse;
@@ -27,12 +28,12 @@ public class CategoryController {
     }
 
     @GetMapping
-    public PageResponse<CategoryEntity> findAll(@ParameterObject Pageable pageable) {
+    public PageResponse<CategoryResponse> findAll(@ParameterObject Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public CategoryEntity findById(@PathVariable Integer id) {
+    public CategoryResponse findById(@PathVariable Integer id) {
         return categoryService.findById(id);
     }
 

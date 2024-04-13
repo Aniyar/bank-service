@@ -3,6 +3,7 @@ package nu.hack.bank.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.bank.dto.BankCreateRequest;
+import nu.hack.bank.dto.BankResponse;
 import nu.hack.bank.entity.BankEntity;
 import nu.hack.bank.service.BankService;
 import nu.hack.common.dto.PageResponse;
@@ -27,12 +28,12 @@ public class BankController {
     }
 
     @GetMapping
-    public PageResponse<BankEntity> findAll(@ParameterObject Pageable pageable) {
+    public PageResponse<BankResponse> findAll(@ParameterObject Pageable pageable) {
         return bankService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public BankEntity findById(@PathVariable Integer id) {
+    public BankResponse findById(@PathVariable Integer id) {
         return bankService.findById(id);
     }
 

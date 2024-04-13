@@ -4,9 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="create_bank_cards_table" author="a.durmagambetova">
-        <createTable tableName="bank_cards"
-                     remarks="Store info about bank cards">
+    <changeSet id="create_user_cards_table" author="a.durmagambetova">
+        <createTable tableName="user_cards"
+                     remarks="Store info about user cards">
             <column name="id" type="bigserial">
                 <constraints primaryKey="true"/>
             </column>
@@ -20,18 +20,22 @@
             </column>
 
             <!--=====================================================================================================-->
-            <column name="bank_id" type="bigint">
-                <constraints nullable="false" references="banks(id)"
-                             foreignKeyName="fk_bank_cards__to__banks"/>/>
+            <column name="bank_card_id" type="bigint">
+                <constraints nullable="false" references="bank_cards(id)"
+                             foreignKeyName="fk_user_cards__to__bank_cards"/>/>
             </column>
 
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" references="app_users(id)"
+                             foreignKeyName="fk_user_cards__to__app_users"/>/>
             </column>
 
-            <column name="image" type="varchar(1024)"/>
+            <column name="card_number" type="varchar(255)"/>
 
-            <column name="comment" type="varchar(1024)"/>
+            <column name="valid_until" type="date"/>
+
+            <column name="alias" type="varchar(255)"/>
+
         </createTable>
 
     </changeSet>

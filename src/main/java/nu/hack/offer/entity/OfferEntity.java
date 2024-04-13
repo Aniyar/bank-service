@@ -6,9 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nu.hack.bank.entity.BankEntity;
+import nu.hack.bankcard.entity.BankCardEntity;
+import nu.hack.category.entity.CategoryEntity;
+
 import nu.hack.common.entity.AuditEntity;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "offers")
@@ -21,9 +27,25 @@ import org.hibernate.annotations.SQLRestriction;
 public class OfferEntity extends AuditEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_id", nullable = false)
-    private BankEntity bank;
-//
-//
-//    private CategoryEntity category;
+    @JoinColumn(name = "bank_card_id", nullable = false)
+    private BankCardEntity bank;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private CategoryEntity category;
+
+    @Column(name = "percentage", nullable = false)
+    private BigDecimal percentage;
+
+    @Column(name = "payment_terms")
+    private String paymentTerms;
+
+    @Column(name = "conditions")
+    private String conditions;
+
+    @Column(name = "dateFrom", nullable = false)
+    private LocalDate dateFrom;
+
+    @Column(name = "dateTo", nullable = false)
+    private LocalDate dateTo;
 }

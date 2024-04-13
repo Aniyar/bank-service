@@ -3,6 +3,7 @@ package nu.hack.bankcard.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.bankcard.dto.BankCardCreateRequest;
+import nu.hack.bankcard.dto.BankCardResponse;
 import nu.hack.bankcard.entity.BankCardEntity;
 import nu.hack.bankcard.service.BankCardService;
 import nu.hack.common.dto.PageResponse;
@@ -27,12 +28,13 @@ public class BankCardController {
     }
 
     @GetMapping
-    public PageResponse<BankCardEntity> findAll(@ParameterObject Pageable pageable) {
-        return bankCardService.findAll(pageable);
+    public PageResponse<BankCardResponse> findAll(@RequestParam(required = false) Integer bankId,
+                                                  @ParameterObject Pageable pageable) {
+        return bankCardService.findAll(bankId, pageable);
     }
 
     @GetMapping("/{id}")
-    public BankCardEntity findById(@PathVariable Integer id) {
+    public BankCardResponse findById(@PathVariable Integer id) {
         return bankCardService.findById(id);
     }
 

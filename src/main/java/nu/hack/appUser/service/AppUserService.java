@@ -35,8 +35,13 @@ public class AppUserService {
 
     @Transactional(readOnly = true)
     public AppUserResponse findById(Integer id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new CommonException(404, "user not found"));
+        var user = getById(id);
         return AppUserMapper.INSTANCE.toResponse(user);
+    }
+
+    @Transactional(readOnly = true)
+    public AppUserEntity getById(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new CommonException(404, "user not found"));
     }
 
     @Transactional(readOnly = true)

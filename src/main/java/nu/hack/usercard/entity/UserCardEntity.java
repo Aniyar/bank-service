@@ -1,12 +1,12 @@
 package nu.hack.usercard.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nu.hack.appUser.entity.AppUserEntity;
+import nu.hack.bankcard.entity.BankCardEntity;
 import nu.hack.common.entity.AuditEntity;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -22,18 +22,21 @@ import java.time.LocalDate;
 @SQLRestriction("is_deleted = 0")
 @SQLDelete(sql = "update user_cards set is_deleted = 1, deleted_at = now() where id = ?")
 public class UserCardEntity extends AuditEntity {
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUserEntity user;
 
     @Column(name = "alias")
     private String alias;
 
-    @Column(name = "bank_id", nullable = false)
-    private Integer bankId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_card_id", nullable = false)
+    private BankCardEntity bankCard;
 
-    @Column(name = "card_number", nullable = false)
+    @Column(name = "card_number")
     private String cardNumber;
 
-    @Column(name = "valid_until", nullable = false)
+    @Column(name = "valid_until")
     private LocalDate validUntil;
 }

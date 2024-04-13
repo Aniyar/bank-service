@@ -7,6 +7,8 @@
     <include file="classpath:db/changelog/bank.xml"/>
     <include file="classpath:db/changelog/app-users.xml"/>
     <include file="classpath:db/changelog/category.xml"/>
+    <include file="classpath:db/changelog/bank-card.xml"/>
+    <include file="classpath:db/changelog/user-card.xml"/>
 
 
 </databaseChangeLog>

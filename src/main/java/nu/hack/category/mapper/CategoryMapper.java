@@ -1,6 +1,7 @@
 package nu.hack.category.mapper;
 
 import nu.hack.category.dto.CategoryCreateRequest;
+import nu.hack.category.dto.CategoryResponse;
 import nu.hack.category.entity.CategoryEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -12,4 +13,6 @@ public interface CategoryMapper {
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
     CategoryEntity toEntity(CategoryCreateRequest request);
+
+    CategoryResponse toResponse(CategoryEntity entity);
 }

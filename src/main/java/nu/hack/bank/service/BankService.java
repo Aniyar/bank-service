@@ -2,6 +2,7 @@ package nu.hack.bank.service;
 
 import lombok.RequiredArgsConstructor;
 import nu.hack.bank.dto.BankCreateRequest;
+import nu.hack.bank.dto.BankResponse;
 import nu.hack.bank.entity.BankEntity;
 import nu.hack.bank.mapper.BankMapper;
 import nu.hack.bank.repository.BankRepository;
@@ -32,15 +33,23 @@ public class BankService {
     }
 
     @Transactional(readOnly = true)
-    public PageResponse<BankEntity> findAll(Pageable pageable) {
+    public PageResponse<BankResponse> findAll(Pageable pageable) {
         var banks = bankRepository.findAll(pageable);
-        return PageResponse.fromPage(banks);
+        return PageResponse.fromPage(banks.map(BankMapper.INSTANCE::toResponse));
     }
 
     @Transactional(readOnly = true)
-    public BankEntity findById(Integer id) {
+    public BankResponse findById(Integer id) {
+        var bank = bankRepository.findById(id).orElseThrow(() -> new CommonException(404, "Bank with this id not found"));
+        return BankMapper.INSTANCE.toResponse(bank);
+    }
+
+    @Transactional(readOnly = true)
+    public BankEntity getEntityById(Integer id) {
         return bankRepository.findById(id).orElseThrow(() -> new CommonException(404, "Bank with this id not found"));
     }
+
+
 
     @Transactional
     public void deleteById(Integer id) {

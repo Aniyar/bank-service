@@ -2,6 +2,7 @@ package nu.hack.category.service;
 
 import lombok.RequiredArgsConstructor;
 import nu.hack.category.dto.CategoryCreateRequest;
+import nu.hack.category.dto.CategoryResponse;
 import nu.hack.category.entity.CategoryEntity;
 import nu.hack.category.mapper.CategoryMapper;
 import nu.hack.category.repository.CategoryRepository;
@@ -32,14 +33,15 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public PageResponse<CategoryEntity> findAll(Pageable pageable) {
+    public PageResponse<CategoryResponse> findAll(Pageable pageable) {
         var categorys = categoryRepository.findAll(pageable);
-        return PageResponse.fromPage(categorys);
+        return PageResponse.fromPage(categorys.map(CategoryMapper.INSTANCE::toResponse));
     }
 
     @Transactional(readOnly = true)
-    public CategoryEntity findById(Integer id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new CommonException(404, "Category with this id not found"));
+    public CategoryResponse findById(Integer id) {
+        var category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(404, "Category with this id not found"));
+        return CategoryMapper.INSTANCE.toResponse(category);
     }
 
     @Transactional
