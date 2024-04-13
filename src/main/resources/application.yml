@@ -25,4 +25,4 @@ management:
   server.port: 8080
 
 swagger:
-  base-url: ${SWAGGER_BASE_URL:http://localhost:8080}
+  base-url: ${SWAGGER_BASE_URL:http://172.20.10.4:8080}

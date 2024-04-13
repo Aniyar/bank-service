@@ -1,0 +1,45 @@
+package nu.hack.bankcard.controller;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import nu.hack.bankcard.dto.BankCardCreateRequest;
+import nu.hack.bankcard.entity.BankCardEntity;
+import nu.hack.bankcard.service.BankCardService;
+import nu.hack.common.dto.PageResponse;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequestMapping("/bank-cards")
+@RequiredArgsConstructor
+public class BankCardController {
+
+    private final BankCardService bankCardService;
+
+    // Create a bank
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@Valid @RequestBody BankCardCreateRequest request) {
+        bankCardService.create(request);
+    }
+
+    @GetMapping
+    public PageResponse<BankCardEntity> findAll(@ParameterObject Pageable pageable) {
+        return bankCardService.findAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public BankCardEntity findById(@PathVariable Integer id) {
+        return bankCardService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable(name = "id") Integer id) {
+        bankCardService.deleteById(id);
+    }
+
+}

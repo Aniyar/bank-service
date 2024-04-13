@@ -1,4 +1,4 @@
-package nu.hack.bank.entity;
+package nu.hack.usercard.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,15 +14,14 @@ import org.hibernate.annotations.SQLRestriction;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "bank_cards")
+@Table(name = "user_cards")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLRestriction("is_deleted = 0")
-@SQLDelete(sql = "update bank_cards set is_deleted = 1, deleted_at = now() where id = ?")
-public class BankCardEntity extends AuditEntity {
-
+@SQLDelete(sql = "update user_cards set is_deleted = 1, deleted_at = now() where id = ?")
+public class UserCardEntity extends AuditEntity {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 

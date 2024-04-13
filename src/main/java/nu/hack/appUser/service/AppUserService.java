@@ -8,6 +8,7 @@ import nu.hack.appUser.dto.AppUserResponse;
 import nu.hack.appUser.entity.AppUserEntity;
 import nu.hack.appUser.mapper.AppUserMapper;
 import nu.hack.appUser.repository.AppUserRepository;
+import nu.hack.common.exception.CommonException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class AppUserService {
     public AppUserResponse create(AppUserCreateRequest request) {
         Specification<AppUserEntity> where = attributeEquals(EMAIL, request.getEmail());
         if (userRepository.exists(where)) {
-            throw new IllegalArgumentException("User Already exists");
+            throw new CommonException(400, "User Already exists");
         }
         var user = AppUserMapper.INSTANCE.toEntity(request);
         user = userRepository.save(user);
@@ -34,16 +35,16 @@ public class AppUserService {
 
     @Transactional(readOnly = true)
     public AppUserResponse findById(Integer id) {
-        var user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        var user = userRepository.findById(id).orElseThrow(() -> new CommonException(404, "user not found"));
         return AppUserMapper.INSTANCE.toResponse(user);
     }
 
     @Transactional(readOnly = true)
     public AppUserResponse login(AppUserLoginRequest request) {
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("user not found"));
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new CommonException(404, "user not found"));
         if (user.getPassword().equals(request.getPassword())) {
             return AppUserMapper.INSTANCE.toResponse(user);
         }
-        throw new IllegalArgumentException("invalid password");
+        throw new CommonException(400, "invalid password");
     }
 }

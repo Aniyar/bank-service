@@ -6,6 +6,7 @@ import nu.hack.bank.entity.BankEntity;
 import nu.hack.bank.mapper.BankMapper;
 import nu.hack.bank.repository.BankRepository;
 import nu.hack.common.dto.PageResponse;
+import nu.hack.common.exception.CommonException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class BankService {
         var entity = BankMapper.INSTANCE.toEntity(request);
         Specification<BankEntity> where = attributeEquals(NAME, request.getName());
         if (bankRepository.exists(where)) {
-            throw new IllegalArgumentException("Bank already exists");
+            throw new CommonException(400, "Bank already exists");
         }
         bankRepository.save(entity);
     }
@@ -38,7 +39,7 @@ public class BankService {
 
     @Transactional(readOnly = true)
     public BankEntity findById(Integer id) {
-        return bankRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Bank with this id not found"));
+        return bankRepository.findById(id).orElseThrow(() -> new CommonException(404, "Bank with this id not found"));
     }
 
     @Transactional

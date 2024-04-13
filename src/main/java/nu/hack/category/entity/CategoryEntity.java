@@ -1,6 +1,8 @@
-package nu.hack.bank.entity;
+package nu.hack.category.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +12,18 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 @Entity
-@Table(name = "banks")
+@Table(name = "categories")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SQLRestriction("is_deleted = 0")
-@SQLDelete(sql = "update banks set is_deleted = 1, deleted_at = now() where id = ?")
-public class BankEntity extends AuditEntity {
+@SQLDelete(sql = "update categories set is_deleted = 1, deleted_at = now() where id = ?")
+public class CategoryEntity extends AuditEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "image")
+    @Column(name = "image", nullable = false)
     private String image;
 }

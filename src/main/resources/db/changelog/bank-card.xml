@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create_categories_table" author="a.durmagambetova">
+        <createTable tableName="categories"
+                     remarks="Store info about categories">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="timestamp with timezone" defaultValueDate="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp with timezone"/>
+            <column name="deleted_at" type="timestamp with timezone"/>
+            <column name="is_deleted" type="smallint" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <!--=====================================================================================================-->
+            <column name="bank_id" type="bigint">
+                <constraints nullable="false" references="banks(id)"
+                             foreignKeyName="fk_bank_cards__to__banks"/>/>
+            </column>
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="image" type="varchar(1024)"/>
+
+            <column name="comment" type="varchar(1024)"/>
+
+
+            @ManyToOne(fetch = FetchType.LAZY)
+            @JoinColumn(name = "bank_id", nullable = false)
+            private BankEntity bank;
+
+            @Column(name = "name", nullable = false)
+            private String name;
+
+            @Column(name = "image")
+            private String image;
+
+            @Column(name = "comment")
+            private String comment;
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

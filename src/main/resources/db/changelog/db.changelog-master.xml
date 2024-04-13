@@ -6,6 +6,7 @@
 
     <include file="classpath:db/changelog/bank.xml"/>
     <include file="classpath:db/changelog/app-users.xml"/>
+    <include file="classpath:db/changelog/category.xml"/>
 
 
 </databaseChangeLog>
