@@ -2,7 +2,6 @@ package nu.hack.bankcard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import nu.hack.bank.dto.BankCreateRequest;
 import nu.hack.bankcard.dto.BankCardCreateRequest;
 import nu.hack.bankcard.dto.BankCardResponse;
 import nu.hack.bankcard.service.BankCardService;
