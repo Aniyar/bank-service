@@ -62,4 +62,13 @@ public class BankCardService {
     public void deleteById(Integer id) {
         cardRepository.deleteById(id);
     }
+
+    @Transactional
+    public void update(Integer id, BankCardCreateRequest request) {
+        var entity = getById(id);
+        entity = BankCardMapper.INSTANCE.toEntity(request, entity);
+        var bank = bankService.getEntityById(request.getBankId());
+        entity.setBank(bank);
+        cardRepository.save(entity);
+    }
 }

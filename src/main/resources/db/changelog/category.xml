@@ -29,4 +29,8 @@
 
     </changeSet>
 
+    <changeSet id="modify_image_column_size_categories" author="a.durmagambetova">
+        <modifyDataType tableName="categories" columnName="image" newDataType="varchar(5120)"/>
+    </changeSet>
+
 </databaseChangeLog>

@@ -3,6 +3,7 @@ package nu.hack.offer.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import nu.hack.offer.dto.OfferCreateRequest;
+import nu.hack.offer.dto.OfferGetRequest;
 import nu.hack.offer.dto.OfferResponse;
 import nu.hack.offer.service.OfferService;
 import nu.hack.common.dto.PageResponse;
@@ -27,14 +28,22 @@ public class OfferController {
     }
 
     @GetMapping
-    public PageResponse<OfferResponse> findAll(@ParameterObject Pageable pageable) {
-        return offerService.findAll(pageable);
+    public PageResponse<OfferResponse> findAll(@Valid @ParameterObject OfferGetRequest request,
+                                               @ParameterObject Pageable pageable) {
+        return offerService.findAll(request, pageable);
     }
 
     @GetMapping("/{id}")
     public OfferResponse findById(@PathVariable Integer id) {
         return offerService.findById(id);
     }
+
+    @GetMapping("/best")
+    public OfferResponse findBest(@RequestParam Integer userId,
+                                  @RequestParam Integer categoryId) {
+        return offerService.findBest(userId, categoryId);
+    }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

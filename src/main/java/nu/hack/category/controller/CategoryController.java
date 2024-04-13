@@ -26,6 +26,11 @@ public class CategoryController {
         categoryService.create(request);
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @Valid @RequestBody CategoryCreateRequest request) {
+        categoryService.update(id, request);
+    }
+
     @GetMapping
     public PageResponse<CategoryResponse> findAll(@ParameterObject Pageable pageable) {
         return categoryService.findAll(pageable);

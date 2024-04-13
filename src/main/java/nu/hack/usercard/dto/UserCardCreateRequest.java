@@ -25,7 +25,6 @@ public class UserCardCreateRequest {
     @Schema(description = "Card alias", example = "типа никнейм карточки")
     private String name;
 
-
     @Schema(description = "Card number", example = "5555 5555 5555 5555")
     private String cardNumber;
 

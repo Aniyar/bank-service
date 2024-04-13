@@ -16,6 +16,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OfferResponse {
 
+    @Schema(description = "Offer id")
+    private Integer id;
+
     @Schema(description = "Bank Card")
     private BankCardResponse bankCard;
 

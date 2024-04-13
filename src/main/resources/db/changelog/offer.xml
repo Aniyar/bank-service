@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create_offers_table" author="a.durmagambetova">
+        <createTable tableName="offers"
+                     remarks="Store info about offers">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="timestamp with timezone" defaultValueDate="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp with timezone"/>
+            <column name="deleted_at" type="timestamp with timezone"/>
+            <column name="is_deleted" type="smallint" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <!--=====================================================================================================-->
+            <column name="bank_card_id" type="bigint">
+                <constraints nullable="false" references="bank_cards(id)"
+                             foreignKeyName="fk_offers__to__bank_cards"/>/>
+            </column>
+
+            <column name="category_id" type="bigint">
+                <constraints nullable="false" references="categories(id)"
+                             foreignKeyName="fk_offers__to__categories"/>/>
+            </column>
+
+            <column name="percentage" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="conditions" type="varchar(1024)"/>
+
+            <column name="date_from" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_to" type="date">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="drop_not_null__offer__category" author="a.durmagambetova">
+        <dropNotNullConstraint tableName="offers" columnName="category_id"/>
+    </changeSet>
+
+
+    <changeSet id="add_column__user_id__offers" author="a.durmagambetova">
+        <addColumn tableName="offers">
+            <column name="user_id" type="INT">
+                <constraints references="app_users(id)"
+                             foreignKeyName="fk_offers__to__users"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

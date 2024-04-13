@@ -40,12 +40,25 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryResponse findById(Integer id) {
-        var category = categoryRepository.findById(id).orElseThrow(() -> new CommonException(404, "Category with this id not found"));
+        var category = getById(id);
         return CategoryMapper.INSTANCE.toResponse(category);
+    }
+
+    @Transactional(readOnly = true)
+    public CategoryEntity getById(Integer id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new CommonException(404, "Category with this id not found"));
     }
 
     @Transactional
     public void deleteById(Integer id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Integer id, CategoryCreateRequest request) {
+        var entity = getById(id);
+        entity = CategoryMapper.INSTANCE.toEntity(request, entity);
+        categoryRepository.save(entity);
     }
 }

@@ -36,4 +36,9 @@
 
     </changeSet>
 
+    <changeSet id="modify_image_column_size_bank_cards" author="a.durmagambetova">
+        <modifyDataType tableName="bank_cards" columnName="image" newDataType="varchar(5120)"/>
+
+    </changeSet>
+
 </databaseChangeLog>

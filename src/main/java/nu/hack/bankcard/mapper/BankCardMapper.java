@@ -6,6 +6,7 @@ import nu.hack.bankcard.dto.BankCardResponse;
 import nu.hack.bankcard.entity.BankCardEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(builder = @Builder(disableBuilder = true), uses = BankMapper.class)
@@ -14,6 +15,8 @@ public interface BankCardMapper {
     BankCardMapper INSTANCE = Mappers.getMapper(BankCardMapper.class);
 
     BankCardEntity toEntity(BankCardCreateRequest request);
+
+    BankCardEntity toEntity(BankCardCreateRequest request, @MappingTarget BankCardEntity entity);
 
     BankCardResponse toResponse(BankCardEntity entity);
 }

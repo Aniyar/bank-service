@@ -2,6 +2,7 @@ package nu.hack.bankcard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import nu.hack.bank.dto.BankCreateRequest;
 import nu.hack.bankcard.dto.BankCardCreateRequest;
 import nu.hack.bankcard.dto.BankCardResponse;
 import nu.hack.bankcard.service.BankCardService;
@@ -26,6 +27,10 @@ public class BankCardController {
         bankCardService.create(request);
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @Valid @RequestBody BankCardCreateRequest request) {
+        bankCardService.update(id, request);
+    }
     @GetMapping
     public PageResponse<BankCardResponse> findAll(@RequestParam(required = false) Integer bankId,
                                                   @ParameterObject Pageable pageable) {

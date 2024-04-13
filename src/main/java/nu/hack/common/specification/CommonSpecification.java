@@ -175,6 +175,14 @@ public class CommonSpecification<T> {
         return (root, query, cb) -> cb.isNull(root.get(attribute));
     }
 
+    public static <T> Specification<T> isNull(String attribute1, String attribute2) {
+        Objects.requireNonNull(attribute1, "Attribute1 should not be empty");
+        Objects.requireNonNull(attribute2, "Attribute2 should not be empty");
+
+        return (root, query, cb) -> cb.isNull(root.get(attribute1).get(attribute2));
+    }
+
+
     /**
      * Creates a Specification that checks if an entity has items in a one-to-many relationship
      * where the items have a specified attribute equal to a given value.

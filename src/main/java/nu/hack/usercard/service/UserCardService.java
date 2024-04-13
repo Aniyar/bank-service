@@ -15,6 +15,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static nu.hack.common.specification.CommonSpecification.alwaysTrue;
 import static nu.hack.common.specification.CommonSpecification.attributeEquals;
 import static nu.hack.usercard.entity.UserCardEntity_.USER;
@@ -51,6 +53,15 @@ public class UserCardService {
         }
         var bankCards = userCardRepository.findAll(where, pageable);
         return PageResponse.fromPage(bankCards.map(UserCardMapper.INSTANCE::toResponse));
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserCardEntity> getAll(Integer userId) {
+        Specification<UserCardEntity> where = alwaysTrue();
+        if (userId != null) {
+            where = where.and(attributeEquals(USER, ID, userId));
+        }
+        return userCardRepository.findAll(where);
     }
 
     @Transactional(readOnly = true)

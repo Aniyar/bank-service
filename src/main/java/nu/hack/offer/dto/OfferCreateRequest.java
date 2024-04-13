@@ -1,6 +1,7 @@
 package nu.hack.offer.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,12 +15,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OfferCreateRequest {
 
+    @Schema(description = "User id. (For mobile)")
+    private Integer userId;
+
     @Schema(description = "Bank Card id", example = "1")
     @NotNull
     private Integer bankCardId;
 
     @Schema(description = "Category id", example = "1")
-    @NotNull
     private Integer categoryId;
 
     @Schema(description = "percentage", example = "2.5")
@@ -30,8 +33,10 @@ public class OfferCreateRequest {
     private String conditions;
 
     @Schema(description = "С какого времени началась акция", example = "2025-03-10")
+    @NotNull
     private LocalDate dateFrom;
 
     @Schema(description = "Когда закончится акция", example = "2025-03-10")
+    @NotNull
     private LocalDate dateTo;
 }

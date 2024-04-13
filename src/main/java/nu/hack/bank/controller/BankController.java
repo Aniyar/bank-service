@@ -26,6 +26,11 @@ public class BankController {
         bankService.create(request);
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @Valid @RequestBody BankCreateRequest request) {
+        bankService.update(id, request);
+    }
+
     @GetMapping
     public PageResponse<BankResponse> findAll(@ParameterObject Pageable pageable) {
         return bankService.findAll(pageable);

@@ -55,4 +55,11 @@ public class BankService {
     public void deleteById(Integer id) {
         bankRepository.deleteById(id);
     }
+
+    @Transactional
+    public void update(Integer id, BankCreateRequest request) {
+        var entity = getEntityById(id);
+        entity = BankMapper.INSTANCE.toEntity(request, entity);
+        bankRepository.save(entity);
+    }
 }
