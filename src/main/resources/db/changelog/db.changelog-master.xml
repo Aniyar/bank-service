@@ -10,6 +10,7 @@
     <include file="classpath:db/changelog/bank-card.xml"/>
     <include file="classpath:db/changelog/user-card.xml"/>
     <include file="classpath:db/changelog/offer.xml"/>
+    <include file="classpath:db/changelog/parsed_offers.xml"/>
 
 
 </databaseChangeLog>
