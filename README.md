@@ -69,7 +69,7 @@ docker-compose -f docker-compose.yml up -d
 To launch the application in the terminal:
 
 ```bash
-java -jar build/libs/bank-service-0.0.1-SNAPSHOT.jar
+java -jar build/libs/bank-service-1.0-SNAPSHOT.jar
 ```
 
 Application will run by default on port 8080
